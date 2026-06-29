@@ -1,37 +1,14 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.egg-info/
-.pytest_cache/
 .venv/
-
-# Environment
+__pycache__/
+*.pyc
+.pytest_cache/
 .env
 .env.*
-
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Database
 *.db
-
-# Logs
 *.log
-
-# Docker
-postgres_data/
-
-# Terraform
 .terraform/
 *.tfstate
 *.tfstate.backup
-
-# Misc
-coverage.xml
-htmlcov/
+.vscode/
+.idea/
+.DS_Store
