@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: enterprise-dev-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_DB: devportal
+    ports:
+      - "5432:5432"
+    volumes:
+      - enterprise_dev_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  enterprise_dev_postgres_data:
