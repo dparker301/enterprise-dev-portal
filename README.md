@@ -1,6 +1,8 @@
 # Enterprise Developer Portal
 
-An enterprise-grade DevOps platform built with:
+A production-style DevOps platform built locally first, then migrated to AWS.
+
+## Stack
 
 - FastAPI
 - PostgreSQL
@@ -12,14 +14,3 @@ An enterprise-grade DevOps platform built with:
 - Ansible
 - Prometheus
 - Grafana
-
-## Development Goals
-
-This project is being built from the ground up as a production-style application to demonstrate:
-
-- Backend API development
-- Infrastructure as Code
-- CI/CD
-- Containerization
-- Monitoring
-- Cloud deployment
