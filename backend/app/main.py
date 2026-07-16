@@ -1,5 +1,5 @@
 from app.core.config import settings
-from app.database import Base, engine
+# from app.database import Base, engine
 from app.routers.projects import router as projects_router
 from fastapi import FastAPI
 
@@ -9,11 +9,6 @@ app = FastAPI(
 )
 
 app.include_router(projects_router)
-
-
-@app.on_event("startup")
-def on_startup():
-    Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")
