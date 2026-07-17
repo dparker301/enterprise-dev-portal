@@ -1,14 +1,26 @@
-.venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+.venv/
+
+# Pytest
 .pytest_cache/
-.env
-.env.*
-*.db
-*.log
-.terraform/
-*.tfstate
-*.tfstate.backup
+
+# Coverage
+.coverage
+htmlcov/
+
+# VS Code
 .vscode/
-.idea/
+
+# macOS
 .DS_Store
+
+# Environment Variables
+.env
+
+# Alembic
+*.db
