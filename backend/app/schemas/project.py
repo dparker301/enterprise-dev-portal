@@ -1,19 +1,31 @@
-from pydantic import BaseModel
+from datetime import datetime
+from typing import Optional
+
+from pydantic import BaseModel, ConfigDict
 
 
 class ProjectBase(BaseModel):
     name: str
-    description: str | None = None
-    owner: str
-    status: str = "active"
+    description: str
+    status: str = "New"
 
 
 class ProjectCreate(ProjectBase):
     pass
 
 
+class ProjectUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    status: Optional[str] = None
+
+
 class ProjectRead(ProjectBase):
     id: int
+    owner_id: int
+    created_at: datetime
+    updated_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(
+        from_attributes=True
+    )
