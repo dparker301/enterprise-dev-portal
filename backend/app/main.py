@@ -1,16 +1,17 @@
+from fastapi import FastAPI
+
 from app.core.config import settings
 from app.database import Base, engine
-from app.routers.projects import router as projects_router
 from app.routers.auth import router as auth_router
-from fastapi import FastAPI
+from app.routers.project import router as project_router
 
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
 )
 
-app.include_router(projects_router)
 app.include_router(auth_router)
+app.include_router(project_router)
 
 
 @app.on_event("startup")
@@ -20,7 +21,9 @@ def on_startup():
 
 @app.get("/")
 def root():
-    return {"message": "Enterprise Dev Portal API"}
+    return {
+        "message": "Enterprise Dev Portal API",
+    }
 
 
 @app.get("/api/health")
