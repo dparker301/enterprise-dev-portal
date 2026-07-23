@@ -3,24 +3,22 @@ from typing import Optional
 
 from jose import JWTError, jwt
 
-SECRET_KEY = "CHANGE_ME_IN_PRODUCTION"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+from app.core.config import settings
 
 
-def create_access_token(data: dict):
+def create_access_token(data: dict) -> str:
     payload = data.copy()
 
     expire = datetime.now(timezone.utc) + timedelta(
-        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+        minutes=settings.access_token_expire_minutes
     )
 
     payload.update({"exp": expire})
 
     return jwt.encode(
         payload,
-        SECRET_KEY,
-        algorithm=ALGORITHM,
+        settings.jwt_secret_key,
+        algorithm=settings.jwt_algorithm,
     )
 
 
@@ -28,8 +26,8 @@ def verify_access_token(token: str) -> Optional[str]:
     try:
         payload = jwt.decode(
             token,
-            SECRET_KEY,
-            algorithms=[ALGORITHM],
+            settings.jwt_secret_key,
+            algorithms=[settings.jwt_algorithm],
         )
 
         username = payload.get("sub")
