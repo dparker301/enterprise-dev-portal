@@ -1,10 +1,7 @@
 from jose import jwt
 
-from app.security.jwt import (
-    ALGORITHM,
-    SECRET_KEY,
-    create_access_token,
-)
+from app.core.config import settings
+from app.security.jwt import create_access_token, verify_access_token
 
 
 def test_create_access_token():
@@ -14,8 +11,26 @@ def test_create_access_token():
 
     payload = jwt.decode(
         token,
-        SECRET_KEY,
-        algorithms=[ALGORITHM],
+        settings.jwt_secret_key,
+        algorithms=[settings.jwt_algorithm],
     )
 
     assert payload["sub"] == "admin"
+
+
+def test_verify_access_token():
+    token = create_access_token(
+        {"sub": "admin"}
+    )
+
+    username = verify_access_token(token)
+
+    assert username == "admin"
+
+
+def test_verify_invalid_access_token():
+    username = verify_access_token(
+        "invalid-token"
+    )
+
+    assert username is None
