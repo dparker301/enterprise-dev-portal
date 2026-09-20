@@ -1,7 +1,11 @@
+import logging
+
 from sqlalchemy.orm import Session
 
 from app.models.project import Project
 from app.schemas.project import ProjectCreate, ProjectUpdate
+
+logger = logging.getLogger(__name__)
 
 
 def create_project(
@@ -19,6 +23,12 @@ def create_project(
     db.add(project)
     db.commit()
     db.refresh(project)
+
+    logger.info(
+        "Created project '%s' for user %s",
+        project.name,
+        owner_id,
+    )
 
     return project
 
@@ -65,6 +75,11 @@ def update_project(
     db.commit()
     db.refresh(project)
 
+    logger.info(
+        "Updated project %s",
+        project.id,
+    )
+
     return project
 
 
@@ -72,5 +87,12 @@ def delete_project(
     db: Session,
     project: Project,
 ) -> None:
+    project_id = project.id
+
     db.delete(project)
     db.commit()
+
+    logger.info(
+        "Deleted project %s",
+        project_id,
+    )
